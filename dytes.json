@@ -1,0 +1,14 @@
+{
+  "name": "workspace_lib",
+  "version": "1.0.1",
+  "description": "project and workspace database capability",
+  "keywords": ["workspace", "project", "database", "sys"],
+  "author": "funxdata",
+  "type": "sys",
+  "license": "MIT",
+  "platform-exports": {
+    "windows": {
+      "./target/release/workspace_lib.dll": "workspace_lib.dll"
+    }
+  }
+}
