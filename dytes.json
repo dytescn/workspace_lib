@@ -1,5 +1,6 @@
 {
   "name": "workspace_lib",
+  "uuid": "6b2cac42-0389-49b1-a74a-55d133148400",
   "version": "1.0.1",
   "description": "project and workspace database capability",
   "keywords": ["workspace", "project", "database", "sys"],
@@ -8,7 +9,8 @@
   "license": "MIT",
   "platform-exports": {
     "windows": {
-      "./target/release/workspace_lib.dll": "workspace_lib.dll"
+      "./target/release/workspace_lib.dll": "workspace_lib.dll",
+      "./docs/mcp.md": "mcp.md"
     }
   }
 }
