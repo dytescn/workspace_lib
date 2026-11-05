@@ -1,7 +1,7 @@
 {
   "name": "workspace_lib",
   "uuid": "6b2cac42-0389-49b1-a74a-55d133148400",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "project and workspace database capability",
   "keywords": ["workspace", "project", "database", "sys"],
   "author": "funxdata",
@@ -10,6 +10,14 @@
   "platform-exports": {
     "windows": {
       "./target/release/workspace_lib.dll": "workspace_lib.dll",
+      "./docs/mcp.md": "mcp.md"
+    },
+    "linux": {
+      "./target/release/libworkspace_lib.so": "workspace_lib.so",
+      "./docs/mcp.md": "mcp.md"
+    },
+    "macos": {
+      "./target/release/libworkspace_lib.dylib": "workspace_lib.dylib",
       "./docs/mcp.md": "mcp.md"
     }
   }

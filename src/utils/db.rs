@@ -11,23 +11,31 @@ const OUT_BUF_SIZE: usize = 65536;
 
 #[cfg(windows)]
 const DATABASE_LIB: &str = "./libary/database.dll";
-#[cfg(not(windows))]
-const DATABASE_LIB: &str = "./libary/database.dll";
+#[cfg(target_os = "linux")]
+const DATABASE_LIB: &str = "./libary/database.so";
+#[cfg(target_os = "macos")]
+const DATABASE_LIB: &str = "./libary/database.dylib";
 
 #[cfg(windows)]
 const SYSINFO_LIB: &str = "./libary/sysinfo.dll";
-#[cfg(not(windows))]
-const SYSINFO_LIB: &str = "./libary/sysinfo.dll";
+#[cfg(target_os = "linux")]
+const SYSINFO_LIB: &str = "./libary/sysinfo.so";
+#[cfg(target_os = "macos")]
+const SYSINFO_LIB: &str = "./libary/sysinfo.dylib";
 
 #[cfg(windows)]
 const CDRIMEX_LIB: &str = "./libary/cdrimex.dll";
-#[cfg(not(windows))]
-const CDRIMEX_LIB: &str = "./libary/cdrimex.dll";
+#[cfg(target_os = "linux")]
+const CDRIMEX_LIB: &str = "./libary/cdrimex.so";
+#[cfg(target_os = "macos")]
+const CDRIMEX_LIB: &str = "./libary/cdrimex.dylib";
 
 #[cfg(windows)]
 const OSTFIL_LIB: &str = "./libary/libostfil.dll";
-#[cfg(not(windows))]
-const OSTFIL_LIB: &str = "./libary/libostfil.dll";
+#[cfg(target_os = "linux")]
+const OSTFIL_LIB: &str = "./libary/libostfil.so";
+#[cfg(target_os = "macos")]
+const OSTFIL_LIB: &str = "./libary/libostfil.dylib";
 
 type FfiFn = unsafe extern "C" fn(*const c_char, *mut c_char) -> c_int;
 
