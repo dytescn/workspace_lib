@@ -79,12 +79,19 @@ fn call_with(lib: &Library, symbol: &[u8], body: Value) -> Result<Value, (i32, S
             .and_then(Value::as_str)
             .unwrap_or("unknown error")
             .to_string();
-        if msg.contains("UNIQUE constraint failed") {
-            return Err((409100, msg));
-        }
-        return Err((500101, msg));
+        return Err(map_error(msg));
     }
     Ok(value)
+}
+
+fn map_error(msg: String) -> (i32, String) {
+    if msg.contains("UNIQUE constraint failed") {
+        return (409100, msg);
+    }
+    if msg.contains("no such table") {
+        return (500201, format!("NEED_SETUP: {msg}"));
+    }
+    (500101, msg)
 }
 
 fn db_lib() -> Result<&'static Library, (i32, String)> {
@@ -160,4 +167,17 @@ pub fn esc(value: &str) -> String {
 
 pub fn now_sql() -> &'static str {
     "datetime('now','localtime')"
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn missing_table_maps_to_need_setup() {
+        let (code, msg) = map_error("no such table: projects".to_string());
+        assert_eq!(code, 500201);
+        assert!(msg.starts_with("NEED_SETUP:"));
+    }
 }

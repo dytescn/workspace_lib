@@ -1,9 +1,14 @@
 {
   "name": "workspace_lib",
   "uuid": "6b2cac42-0389-49b1-a74a-55d133148400",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "project and workspace database capability",
-  "keywords": ["workspace", "project", "database", "sys"],
+  "keywords": [
+    "workspace",
+    "project",
+    "database",
+    "sys"
+  ],
   "author": "funxdata",
   "type": "sys",
   "license": "MIT",
