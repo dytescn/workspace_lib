@@ -321,7 +321,7 @@ mod tests {
     use super::*;
 
     static RES: Resource = Resource {
-        db: "./project",
+        db: "project",
         table: "projects",
         fields: &["name", "description", "schedule"],
         required: &["name"],

@@ -1,7 +1,7 @@
 {
   "name": "workspace_lib",
   "uuid": "6b2cac42-0389-49b1-a74a-55d133148400",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "project and workspace database capability",
   "keywords": [
     "workspace",
@@ -25,5 +25,10 @@
       "./target/release/libworkspace_lib.dylib": "workspace_lib.dylib",
       "./docs/mcp.md": "mcp.md"
     }
+  },
+  "dependencies-sys": {
+    "database": "1.0.6",
+    "ostfil": "1.0.5",
+    "sysinfo": "0.1.2"
   }
 }

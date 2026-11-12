@@ -3,11 +3,12 @@ use serde_json::Value;
 use std::ffi::{c_char, c_int, CStr, CString};
 use std::sync::OnceLock;
 
-pub const PROJECT_DB: &str = "./project";
-pub const DESIGN_DB: &str = "./design";
-pub const ROUTER_DB: &str = "./router";
+pub const PROJECT_DB: &str = "project";
+pub const DESIGN_DB: &str = "design";
+pub const ROUTER_DB: &str = "router";
 
-const OUT_BUF_SIZE: usize = 65536;
+/// database 1.0.5+ 约定 `json_out` 至少 1 MiB。
+const OUT_BUF_SIZE: usize = 1024 * 1024;
 
 #[cfg(windows)]
 const DATABASE_LIB: &str = "./libary/database.dll";
@@ -101,7 +102,7 @@ fn db_lib() -> Result<&'static Library, (i32, String)> {
 pub fn query(db: &str, sql: &str) -> Result<Vec<Value>, (i32, String)> {
     let value = call_with(
         db_lib()?,
-        b"post_db_query",
+        b"db_query",
         serde_json::json!({ "path": db, "sql": sql }),
     )?;
     Ok(value
@@ -129,21 +130,21 @@ pub fn execute(symbol: &[u8], db: &str, sql: &str) -> Result<(), (i32, String)> 
 }
 
 pub fn update(db: &str, sql: &str) -> Result<(), (i32, String)> {
-    execute(b"post_db_update", db, sql)
+    execute(b"db_update", db, sql)
 }
 
 pub fn insert(db: &str, sql: &str) -> Result<(), (i32, String)> {
-    execute(b"post_db_insert", db, sql)
+    execute(b"db_insert", db, sql)
 }
 
 pub fn delete(db: &str, sql: &str) -> Result<(), (i32, String)> {
-    execute(b"post_db_delete", db, sql)
+    execute(b"db_delete", db, sql)
 }
 
 pub fn create_table(db: &str, table: &str, schema: &str) -> Result<(), (i32, String)> {
     call_with(
         db_lib()?,
-        b"post_db_create",
+        b"db_create",
         serde_json::json!({ "path": db, "table": table, "schema": schema }),
     )?;
     Ok(())
